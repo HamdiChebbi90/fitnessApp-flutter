@@ -6,17 +6,18 @@ class ExercisePage extends StatelessWidget {
   final String sets;
   final String reps;
   final bool isDone;
+
   final Function(bool?)? onchekboxChanged;
-  const ExercisePage(
-      {super.key,
-      required this.exerciseName,
-      required this.weight,
-      required this.sets,
-      required this.reps,
-      required this.isDone,
-      required this.onchekboxChanged,
-      required Text title,
-      required Row subtitle});
+
+  const ExercisePage({
+    super.key,
+    required this.exerciseName,
+    required this.weight,
+    required this.sets,
+    required this.reps,
+    required this.isDone,
+    required this.onchekboxChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +40,24 @@ class ExercisePage extends StatelessWidget {
           children: [
             Row(
               children: [
-                Chip(label: Text("${weight}kg")),
+                Chip(
+                  label: Text("${weight}kg",
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  elevation: 10,
+                  shadowColor: Colors.redAccent,
+                  backgroundColor: Colors.grey[300],
+                ),
                 Chip(label: Text("${sets}sets")),
                 Chip(label: Text("${reps}reps")),
               ],
             ),
             Checkbox(
               value: isDone,
-              onChanged: (value) => onchekboxChanged!(value),
-            )
+              onChanged: (val) => onchekboxChanged!(val),
+            ),
           ],
         ),
       ),

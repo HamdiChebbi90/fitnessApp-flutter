@@ -8,143 +8,45 @@ class WorkoutData extends ChangeNotifier {
 
   List<Workout> workoutList = [
     Workout(
-      name: "Chest",
+      name: 'Chest',
       exercises: [
+        Exercise(name: 'Bench Press', sets: "3", reps: "10", weight: "50"),
         Exercise(
-          name: "Bench Press",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
+            name: 'Incline Bench Press', sets: "3", reps: "10", weight: "50"),
         Exercise(
-          name: "Incline Bench Press",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Decline Bench Press",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Dumbbell Fly",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Cable Fly",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
+            name: 'Decline Bench Press', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Dumbbell Fly', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Cable Fly', sets: "3", reps: "10", weight: "50"),
       ],
     ),
     Workout(
-      name: "Back",
+      name: 'Back',
       exercises: [
-        Exercise(
-          name: "Deadlift",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Pull Up",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Lat Pulldown",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Seated Row",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Dumbbell Row",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
+        Exercise(name: 'Deadlift', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Pull Up', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Lat Pulldown', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Seated Row', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Bent Over Row', sets: "3", reps: "10", weight: "50"),
       ],
     ),
     Workout(
-      name: "Legs",
+      name: 'Legs',
       exercises: [
-        Exercise(
-          name: "Squat",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Leg Press",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Leg Extension",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Leg Curl",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Calf Raise",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
+        Exercise(name: 'Squat', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Leg Press', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Leg Extension', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Leg Curl', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Calf Raise', sets: "3", reps: "10", weight: "50"),
       ],
     ),
     Workout(
-      name: "Shoulders",
+      name: 'Shoulders',
       exercises: [
-        Exercise(
-          name: "Shoulder Press",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Lateral Raise",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Front Raise",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Rear Delt Fly",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
-        Exercise(
-          name: "Shrug",
-          sets: 4,
-          reps: 8,
-          weight: 60,
-        ),
+        Exercise(name: 'Shoulder Press', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Lateral Raise', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Front Raise', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Rear Delt Fly', sets: "3", reps: "10", weight: "50"),
+        Exercise(name: 'Shrug', sets: "3", reps: "10", weight: "50"),
       ],
     ),
   ];
@@ -162,6 +64,12 @@ class WorkoutData extends ChangeNotifier {
     return workoutList;
   }
 
+  //get lenght of a given workout
+  int getWorkoutLength(String workoutName) {
+    Workout relevantWorkout = getRelevantWorkout(workoutName);
+    return relevantWorkout.exercises.length;
+  }
+
   //add a new workout
   void addWorkout(String name) {
     workoutList.add(Workout(name: name, exercises: []));
@@ -174,9 +82,9 @@ class WorkoutData extends ChangeNotifier {
     return relevantWorkout.exercises.length;
   }
 
-  // add a new exercise
-  void addExercise(
-      String workoutName, String exerciceName, int sets, int reps, int weight) {
+  // add a new exercise to a workout
+  void addExercise(String workoutName, String exerciceName, String sets,
+      String reps, String weight) {
     Workout relevantWorkout =
         getRelevantWorkout(workoutName); //get the relevant workout
     relevantWorkout.exercises.add(
@@ -195,20 +103,21 @@ class WorkoutData extends ChangeNotifier {
   void checkExercise(String workoutName, String exerciseName) {
     Exercise relevantExercise = getRelevantExercise(workoutName, exerciseName);
     relevantExercise.isDone = !relevantExercise.isDone;
+
     notifyListeners();
     db.saveToDb(workoutList);
   }
 
   Workout getRelevantWorkout(String workoutName) {
     Workout relevantWorkout =
-        workoutList.firstWhere((element) => element.name == workoutName);
+        workoutList.firstWhere((workout) => workout.name == workoutName);
     return relevantWorkout;
   }
 
   Exercise getRelevantExercise(String workoutName, String exerciseName) {
     Workout relevantWorkout = getRelevantWorkout(workoutName);
     Exercise relevantExercise = relevantWorkout.exercises
-        .firstWhere((element) => element.name == exerciseName);
+        .firstWhere((exercise) => exercise.name == exerciseName);
     return relevantExercise;
   }
 }

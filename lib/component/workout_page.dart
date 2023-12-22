@@ -26,11 +26,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
   final newSetsController = TextEditingController();
   final newRepsController = TextEditingController();
 
-  //cancel Exercise
-  void canel() {
-    Navigator.pop(context);
-  }
-
   //create new exercise
   void CreateNewExercise() {
     showDialog(
@@ -78,21 +73,37 @@ class _WorkoutPageState extends State<WorkoutPage> {
     //get exercice name from text field
     String exerciceName = newExerciceController.text;
     //get weight from text field
-    int weight = int.parse(newWeightController.text);
+    String weight = newWeightController.text;
     //get sets from text field
-    int sets = int.parse(newSetsController.text);
+    String sets = newSetsController.text;
     //get reps from text field
-    int reps = int.parse(newRepsController.text);
+    String reps = newRepsController.text;
+
     //add exercise
-    Provider.of<WorkoutData>(context, listen: false)
-        .addExercise(widget.workoutName, exerciceName, sets, reps, weight);
-    //clear text field
+    Provider.of<WorkoutData>(context, listen: false).addExercise(
+        widget.workoutName,
+        exerciceName,
+        sets.toString(),
+        reps.toString(),
+        weight.toString());
+
+    //close dialog
+    Navigator.pop(context);
+    clear();
+  }
+
+  //cancel Exercise
+  void canel() {
+    Navigator.pop(context);
+    clear();
+  }
+
+  //clear controllers
+  void clear() {
     newExerciceController.clear();
     newWeightController.clear();
     newSetsController.clear();
     newRepsController.clear();
-    //close dialog
-    Navigator.pop(context);
   }
 
   @override
@@ -100,54 +111,47 @@ class _WorkoutPageState extends State<WorkoutPage> {
     return Consumer<WorkoutData>(
       builder: (context, value, child) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.blueAccent,
-            title: Text(widget.workoutName),
-            centerTitle: true,
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: CreateNewExercise,
-            child: const Icon(Icons.add),
-          ),
-          body: ListView.builder(
-            itemCount: value.numberOfExercises(widget.workoutName),
-            itemBuilder: (context, index) => ExercisePage(
-              title: Text(
-                value
+            appBar: AppBar(
+              backgroundColor: Colors.blueAccent,
+              title: Text(widget.workoutName),
+              centerTitle: true,
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: CreateNewExercise,
+              child: const Icon(Icons.add),
+            ),
+            body: ListView.builder(
+              itemCount: value.numberOfExercises(widget.workoutName),
+              itemBuilder: (context, index) => ExercisePage(
+                exerciseName: value
                     .getRelevantWorkout(widget.workoutName)
                     .exercises[index]
                     .name,
-              ),
-              subtitle: Row(
-                children: [
-                  Chip(
-                      label: Text(
-                          "${value.getRelevantWorkout(widget.workoutName).exercises[index].weight}kg")),
-                  Chip(
-                      label: Text(
-                          "${value.getRelevantWorkout(widget.workoutName).exercises[index].sets}sets")),
-                  Chip(
-                      label: Text(
-                          "${value.getRelevantWorkout(widget.workoutName).exercises[index].reps}reps")),
-                ],
-              ),
-              onchekboxChanged: (val) {
-                onchekboxChanged(
+                weight: value
+                    .getRelevantWorkout(widget.workoutName)
+                    .exercises[index]
+                    .weight,
+                sets: value
+                    .getRelevantWorkout(widget.workoutName)
+                    .exercises[index]
+                    .sets,
+                reps: value
+                    .getRelevantWorkout(widget.workoutName)
+                    .exercises[index]
+                    .reps,
+                isDone: value
+                    .getRelevantWorkout(widget.workoutName)
+                    .exercises[index]
+                    .isDone,
+                onchekboxChanged: (val) => onchekboxChanged(
                   widget.workoutName,
                   value
                       .getRelevantWorkout(widget.workoutName)
                       .exercises[index]
                       .name,
-                );
-              },
-              exerciseName: '',
-              weight: '',
-              sets: '',
-              reps: '',
-              isDone: false,
-            ),
-          ),
-        );
+                ),
+              ),
+            ));
       },
     );
   }

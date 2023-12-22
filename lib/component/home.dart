@@ -39,10 +39,12 @@ class _HomeState extends State<Home> {
 
   //save workout
   void save() {
-    Provider.of<WorkoutData>(context, listen: false)
-        .addWorkout(newWorkoutController.text);
-    newWorkoutController.clear();
+    String newWorkoutName = newWorkoutController.text;
+    Provider.of<WorkoutData>(context, listen: false).addWorkout(newWorkoutName);
     Navigator.pop(context);
+    // GoTo(newWorkoutName);
+
+    newWorkoutController.clear();
   }
 
   //cancel workout
@@ -87,6 +89,9 @@ class _HomeState extends State<Home> {
               return ListTile(
                 title: Text(value.getWorkoutList()[index].name),
                 trailing: const Icon(Icons.arrow_forward_ios),
+                onTap: () {
+                  GoTo(value.getWorkoutList()[index].name);
+                },
               );
             },
           ),

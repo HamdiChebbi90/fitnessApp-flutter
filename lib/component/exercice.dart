@@ -1,9 +1,9 @@
 class Exercise {
   final String name;
-  final int sets;
-  final int reps;
-  final int weight;
-  bool isDone = false;
+  final String sets;
+  final String reps;
+  final String weight;
+  bool isDone;
 
   Exercise({
     required this.name,
@@ -13,7 +13,7 @@ class Exercise {
     this.isDone = false,
   });
 
-  void toggleDone() {
-    isDone = !isDone;
-  }
+  // void toggleDone() {
+  //   isDone = !isDone;
+  // }
 }
