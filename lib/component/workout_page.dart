@@ -116,9 +116,22 @@ class _WorkoutPageState extends State<WorkoutPage> {
               title: Text(widget.workoutName),
               centerTitle: true,
             ),
+            backgroundColor: Colors.black,
             floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.lightGreenAccent[400],
               onPressed: CreateNewExercise,
-              child: const Icon(Icons.add),
+              child: const Icon(
+                Icons.add,
+                size: 30,
+                shadows: [
+                  Shadow(
+                    color: Colors.black,
+                    blurRadius: 10,
+                    offset: Offset(-5, 5),
+                  ),
+                ],
+                // weight: 20,
+              ),
             ),
             body: ListView.builder(
               itemCount: value.numberOfExercises(widget.workoutName),

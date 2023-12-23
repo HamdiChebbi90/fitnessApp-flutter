@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => WorkoutData(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false, // remove debug banner
+        title: 'GymUp',
+
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

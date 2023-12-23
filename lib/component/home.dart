@@ -70,16 +70,16 @@ class _HomeState extends State<Home> {
       builder: (context, value, child) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.blue[400],
+            backgroundColor: Colors.black,
             centerTitle: true,
             title: const Text(
-              "Fitness App",
-              style: TextStyle(color: Colors.black),
+              "GymUp",
+              style: TextStyle(color: Color.fromRGBO(118, 255, 3, 1)),
               textAlign: TextAlign.center,
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.blue[400],
+            backgroundColor: Colors.lightGreenAccent[400],
             onPressed: CreateNewWorkout,
             child: const Icon(Icons.add),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class ExercisePage extends StatelessWidget {
   final String exerciseName;
@@ -25,16 +26,21 @@ class ExercisePage extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
         gradient: const LinearGradient(
           colors: [
-            Colors.blueAccent,
-            Colors.redAccent,
+            Colors.black,
+            Color.fromRGBO(117, 117, 117, 1),
+            Color.fromRGBO(245, 242, 242, 1),
           ],
         ),
       ),
       child: ListTile(
-        title: Text(exerciseName),
+        title: Text(exerciseName,
+            style: const TextStyle(
+              color: Color.fromRGBO(118, 255, 3, 1),
+              fontWeight: FontWeight.bold,
+            )),
         subtitle: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -43,15 +49,46 @@ class ExercisePage extends StatelessWidget {
                 Chip(
                   label: Text("${weight}kg",
                       style: const TextStyle(
+                        // color: Color.fromRGBO(118, 255, 3, 1),
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       )),
-                  elevation: 10,
-                  shadowColor: Colors.redAccent,
-                  backgroundColor: Colors.grey[300],
+                  elevation: 15,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  shadowColor: Colors.lightGreenAccent[400],
                 ),
-                Chip(label: Text("${sets}sets")),
-                Chip(label: Text("${reps}reps")),
+                const Gap(10),
+                Chip(
+                  label: Text("${sets}sets",
+                      style: const TextStyle(
+                        // color: Color.fromRGBO(118, 255, 3, 1),
+                        color: Colors.black,
+
+                        fontWeight: FontWeight.bold,
+                      )),
+                  elevation: 10,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  shadowColor: Colors.lightGreenAccent[400],
+                ),
+                const Gap(10),
+                Chip(
+                  label: Text("${reps}reps",
+                      style: const TextStyle(
+                        // color: Color.fromRGBO(118, 255, 3, 1),
+                        color: Colors.black,
+
+                        fontWeight: FontWeight.bold,
+                      )),
+                  elevation: 10,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  shadowColor: Colors.lightGreenAccent[400],
+                ),
               ],
             ),
             Checkbox(
